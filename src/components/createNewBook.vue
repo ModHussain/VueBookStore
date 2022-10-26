@@ -1,22 +1,23 @@
 <template>
-<div class="justify-content-center m-5" style="margin: 10px 20% !important;">
+    <div class="justify-content-center m-5" style="margin: 10px 20% !important;">
         <div class="m-5 p5">
-            <h3 class="text-center">{{Heading}}</h3>
+            <h3 class="text-center">{{ Heading }}</h3>
             <form @submit.prevent="handleSubmitForm" class="border p-5 my-5">
                 <div class="form-group">
-                    <label>{{pagetextLabel.bookName}}</label>
+                    <label>{{ pagetextLabel.bookName }}</label>
                     <input type="text" class="form-control" v-model="book.bookName" required>
                 </div>
                 <div class="form-group">
-                    <label>{{pagetextLabel.bookPrice}}</label>
+                    <label>{{ pagetextLabel.bookPrice }}</label>
                     <input type="number" class="form-control" v-model="book.price" required>
                 </div>
                 <div class="form-group mt-2">
-                    <img v-if="book.bookImg.length==0" class="card-img-top" src="https://via.placeholder.com/150" height="300">
-                    <img v-else :src="book.bookImg" class="card-img-top" alt="..." height="300"/>
+                    <img v-if="book.bookImg.length == 0" class="card-img-top" src="https://via.placeholder.com/150"
+                        height="300">
+                    <img v-else :src="book.bookImg" class="card-img-top" alt="..." height="300" />
                 </div>
                 <div class="form-group">
-                    <label>{{pagetextLabel.bookImg}}</label>
+                    <label>{{ pagetextLabel.bookImg }}</label>
                     <input type="text" class="form-control" v-model="book.bookImg" required>
                 </div>
                 <div class="form-group py-3">
@@ -29,39 +30,34 @@
 <script>
 import axiosService from "../Services/axoisService";
 import router from '@/router';
-export default{
-    data(){
-        return{
-            pagetextLabel:{
-                bookName:'Book Name',
-                bookPrice:'Book price',
-                bookImg:'Book Image'
+export default {
+    data() {
+        return {
+            pagetextLabel: {
+                bookName: 'Book Name',
+                bookPrice: 'Book price',
+                bookImg: 'Book Image'
             },
-            heading:'',
-            book:{
-                bookName:'',
-                price:'',
-                bookImg:''
+            heading: '',
+            book: {
+                bookName: '',
+                price: '',
+                bookImg: ''
             }
         }
     },
-    methods:{
+    methods: {
         handleSubmitForm() {
-            axiosService.createBook(this.book).then(function(res){
+            axiosService.createBook(this.book).then(function (res) {
                 console.log(res);
                 router.push({ path: '/getBooks' });
-            //     this.book={
-            //     bookName:'',
-            //     price:'',
-            //     bookImg:''
-            // }
             }).catch(error => {
-                    console.log(error)
-                });
+                console.log(error)
+            });
         }
     },
-    created(){
-        this.Heading="Add New Book"
+    created() {
+        this.Heading = "Add New Book"
     }
 }
 </script>

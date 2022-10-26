@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 // Connect mongoDB
 
 mongoose
-  .connect("mongodb+srv://modhussain:inazumaHussain8@cluster0.s9hinz0.mongodb.net/?retryWrites=true&w=majority")
+  .connect("localDB or Global url path")
   .then((x) => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
