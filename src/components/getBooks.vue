@@ -53,6 +53,10 @@ export default {
             }).catch((err) => {
                 console.log("error in deleting records");
             })
+        },
+        subString(data){
+            let subStringData= data.length>=15 ? data.substring(0,15) + '...' : data;
+            return subStringData
         }
     }
 }
@@ -66,7 +70,7 @@ export default {
                     <img v-if="result.bookImg == null" src="https://via.placeholder.com/150" height="300">
                     <img v-else :src="result.bookImg" class="card-img-top" alt="..." height="300">
                     <div class="card-body">
-                        <h5 class="card-title">{{ result.bookName }}</h5>
+                        <h5 class="card-title" :title="result.bookName">{{ subString(result.bookName) }}</h5>
                         <span class="card-link">Rs: {{ result.price }}</span>
                         <span class="card-link btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                             @click="getSelectedBook(result._id)">Edit</span>
