@@ -1,7 +1,12 @@
 
 <script>
 import axiosService from "../Services/axoisService"
+import activityService from "../Services/activityService";
+import recentAction from '../components/recentAction.vue';
 export default {
+    components: {
+        recentAction
+  },
     data() {
         return {
             mainResult: [],
@@ -14,7 +19,8 @@ export default {
                 bookName: '',
                 price: '',
                 bookImg: ''
-            }
+            },
+            bookInfo:[]
         }
     },
     created() {
@@ -22,7 +28,9 @@ export default {
     },
     methods: {
         getSelectedBook(data) {
-            axiosService.getSelectedBook(data).then((res) => {
+            let bookId=data._id;
+            axiosService.getSelectedBook(bookId).then((res) => {
+                activityService.setActivity(data.bookName+" is Viewed");
                 this.book = res.data;
             }).catch((err) => {
                 console.log(err);
@@ -30,6 +38,7 @@ export default {
         },
         handleEditSubmitForm() {
             axiosService.editBook(this.book).then((res) => {
+                activityService.setActivity(this.book.bookName+" is Updated");
                 console.log(res);
                 document.querySelector("#closeModel").click();
                 this.getAllbooks();
@@ -47,11 +56,13 @@ export default {
             })
         },
         deleteBook(data) {
-            axiosService.deleteBook(data).then((res) => {
+            let bookId=data._id;
+            axiosService.deleteBook(bookId).then((res) => {
+                activityService.setActivity(data.bookName+" is Deleted");
                 console.log(res);
                 this.getAllbooks();
             }).catch((err) => {
-                console.log("error in deleting records");
+                console.log("error in deleting record");
             })
         },
         subString(data){
@@ -63,6 +74,7 @@ export default {
 </script>
 
 <template>
+    <recentAction />
     <div class="container">
         <div class="row">
             <div class="col-sm-3" v-for="result in mainResult" :key="result._id">
@@ -73,8 +85,8 @@ export default {
                         <h5 class="card-title" :title="result.bookName">{{ subString(result.bookName) }}</h5>
                         <span class="card-link">Rs: {{ result.price }}</span>
                         <span class="card-link btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                            @click="getSelectedBook(result._id)">Edit</span>
-                        <span class="card-link btn btn-danger" @click="deleteBook(result._id)">Delete</span>
+                            @click="getSelectedBook(result)">Edit</span>
+                        <span class="card-link btn btn-danger" @click="deleteBook(result)">Delete</span>
                     </div>
                 </div>
             </div>
