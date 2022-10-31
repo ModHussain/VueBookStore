@@ -28,8 +28,9 @@
     </div>
 </template>
 <script>
-import axiosService from "../Services/axoisService";
 import router from '@/router';
+import axiosService from "../Services/axoisService";
+import activityService from "../Services/activityService";
 export default {
     data() {
         return {
@@ -48,6 +49,7 @@ export default {
     },
     methods: {
         handleSubmitForm() {
+            activityService.setActivity(this.book.bookName+" is Added");
             axiosService.createBook(this.book).then(function (res) {
                 console.log(res);
                 router.push({ path: '/getBooks' });

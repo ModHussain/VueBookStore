@@ -23,7 +23,7 @@ export default {
             bookInfo:[]
         }
     },
-    created() {
+    mounted() {
         this.getAllbooks();
     },
     methods: {

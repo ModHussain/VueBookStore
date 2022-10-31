@@ -1,6 +1,6 @@
-import { Subject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
-const activity = new Subject();
+const activity = new ReplaySubject();
 var DataValue;
 
 const activityService = {

@@ -1,5 +1,10 @@
 <template>
-    <div class="jumbotron">
+    <div class="jumbotron mt-5 pt-5" v-if="notify==false">
+        <div class="container text-center">
+            No Action recorded
+        </div>
+    </div>
+    <div class="jumbotron" v-else="notify==true">
         <div class="container text-center">
             <div class="m-4" v :class="notify ? 'd-block': 'd-none'">
                 <h6 class="text-center btn btn-primary m-4 position-relative" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> Click to Know Activity Notifications
@@ -29,12 +34,13 @@ export default{
             notify:false
         }
     },
-    created(){
+    mounted(){
         this.getAllActivity();
     },
     methods: {
         getAllActivity(){
             activityService.getActivity().subscribe((res)=>{
+                console.log(res);
                 this.notify=true;
                 this.bookInfo.push(res);
             })

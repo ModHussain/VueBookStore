@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
@@ -21,6 +21,9 @@ import { RouterLink, RouterView } from 'vue-router'
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><RouterLink to="/getBooks">Get Books</RouterLink></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><RouterLink to="/getActivity">Get Notifications</RouterLink></a>
       </li>
     </ul>
   </div>
