@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/getBooks',
       name: 'Get Books',
       component: () => import('../components/getBooks.vue')
+    },
+    {
+      path: '/getActivity',
+      name: 'Get Activies',
+      component: () => import('../components/recentAction.vue')
     }
   ]
 })
